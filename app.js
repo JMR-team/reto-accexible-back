@@ -8,7 +8,7 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config()
 
 // Load the routers
-const apiRouter = require('./routes/api-router');
+const apiRouter = require('./routes/api/router');
 
 // Declare and init the app instance
 const app = express();
