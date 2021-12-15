@@ -1,21 +1,121 @@
 <mjml>
   <mj-head>
+    <mj-title>AcceXible-Email</mj-title>
+    <mj-preview>AcceXible</mj-preview>
     <mj-attributes>
-      <mj-all padding="0px"></mj-all>
-      <mj-text font-family="Ubuntu, Helvetica, Arial, sans-serif" padding="0 25px" font-size="13px"></mj-text>
-      <mj-section background-color="#ffffff"></mj-section>
-      <mj-class name="preheader" color="#000000" font-size="11px"></mj-class>
+      <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-text>
     </mj-attributes>
-    <mj-style inline="inline">a { text-decoration: none!important; color: inherit!important; }</mj-style>
+    <mj-style inline="inline">
+      .body-section {
+      -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .text-link {
+      color: #5e6ebf
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .footer-link {
+      color: #888888
+      }
+    </mj-style>
+
   </mj-head>
-  <mj-body background-color="#bedae6">
-    <mj-section padding-bottom="20px" padding-top="10px">
-      <mj-column>
-        <mj-text align="center" padding="10px 25px" font-size="20px" color="#512d0b"><strong>Hola {{firstName}}</strong></mj-text>
-        <mj-text align="center" padding="10px 25px" font-size="12px">
-            Los resultados de tu test no estan mal del todo: {{totalScore}} sobre 15
-        </mj-text>
+  <mj-body background-color="#42B5E1" width="700px">
+    <mj-section full-width="full-width" background-color="#fff" padding-bottom="0">
+      <mj-column width="100%">
+        <mj-image src="https://accexible.com/static/media/accexible_logo.42a306b1.png" alt="" align="center" width="300px" padding-bottom="30px"/>
+        <mj-image src="https://d2r55xnwy6nx47.cloudfront.net/uploads/2018/03/RecycleNetwork_1300Lede1.jpg" width="700px" alt="" padding="0" href="https://google.com" />
       </mj-column>
     </mj-section>
+   
+    <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section">
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+        <mj-column width="100%">
+          <mj-text color="#637381" font-size="16px">
+            Hola {{firstName}},
+          </mj-text>
+          <mj-text color="#637381" font-size="16px">
+            Tras finalizar el test, has obtenido una puntuación de {{totalScore}} sobre 15 puntos, esta puntuación esta basada en las dos pruebas que ha realizado anteriormente.
+          </mj-text>
+          <mj-text color="#637381" font-size="16px">
+            <ul>
+              <li style="padding-bottom: 20px"><strong>Test de Preguntas:</strong> en el que valoramos una serie de puntos para optimizar de la mejor manera posible su estado anímico.</li>
+              <li><strong>Chatbot:</strong> en el cual definimos mediante una serie de patrones si puede padecer algún indicativo que muestre cuadros de ansiedad.</li>
+            </ul>
+          </mj-text>
+          <mj-text color="#637381" font-size="16px" padding-bottom="10px">
+            Con los resultados obtenidos, se aprecian rasgos depresivos severos.
+            Por ello, le instamos a visitar de la manera más urgente posible a un especialista que determine de manera profesional si está sufriendo algún episodio de ansiedad.
+          </mj-text>
+          <mj-text color="#637381" font-size="16px" padding-bottom="30px">
+            En el siguiente enlace puede ver que centros de salud están más próximos a su ubicación y si lo desea oportuno acudir a uno de ellos.
+          </mj-text>
+          <mj-button background-color="#24212A" align="center" color="#ffffff" font-size="17px" font-weight="bold" href="https://www.google.com/maps/search/consulta+psicologica/" target="_blank" width="300px">
+            CENTROS CERCANOS
+          </mj-button>
+         
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+        <mj-column width="60%">
+          <mj-image align="center" src="https://www.harvard-deusto.com/sites/default/files/styles/article_front/public/2020-08/salud-mental-era-digital-nuevas-posibilidades.jpg?itok=zh_jcel4" height="150px" alt="" />
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px" padding-top="0">
+        <mj-column width="100%">
+          <mj-divider border-color="#DFE3E8" border-width="1px" />
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding="0 15px 0 15px">
+        <mj-column width="100%">
+           <mj-image src="https://accexible.com/static/media/accexible_logo.42a306b1.png" alt="" align="center" width="300px"/>
+          <mj-text color="#637381" font-size="16px" align="center">
+            Salud mental accesible para tod@s
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
+        <mj-column width="50%">
+          <mj-text color="#212b35" font-size="15px" font-weight="bold" padding-bottom="0">
+            BARCELONA
+          </mj-text>
+          <mj-text color="#637381" font-size="14px" padding-top="0">
+            Barcelona Tech City
+            <br />
+            Plaça de Pau Vila, 1 Bloc A, Planta 3, Porta 3A1, 08003
+          </mj-text>
+        </mj-column>
+        <mj-column width="50%">
+          <mj-text color="#212b35" font-size="15px" font-weight="bold" padding-bottom="0">
+            BILBAO
+          </mj-text>
+          <mj-text color="#637381" font-size="14px" padding-top="0">
+            INNOLAB Bilbao
+            <br />
+            Gordoniz 44, 48002
+          </mj-text>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+    <mj-wrapper full-width="full-width">
+      <mj-section>
+        <mj-column width="100%" padding="0">
+          <mj-social font-size="15px" icon-size="30px" mode="horizontal" padding="0" align="center">
+
+            <mj-social-element name="twitter-noshare" href="https://twitter.com/accexible" target="_blank" background-color="#24212A">
+            </mj-social-element>
+            <mj-social-element name="linkedin-noshare" href="https://www.linkedin.com/company/accexible/?originalSubdomain=es" target="_blank" background-color="#24212A">
+            </mj-social-element>
+          </mj-social>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
   </mj-body>
 </mjml>
