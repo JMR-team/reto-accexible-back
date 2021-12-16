@@ -18,4 +18,4 @@ function personalPronouns(text) {
     return 0;
 }
 
-export default personalPronouns
+module.exports = personalPronouns;
