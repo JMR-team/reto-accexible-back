@@ -29,4 +29,4 @@ function rumination(text) {
     return returnValue;
 }
 
-export default rumination
+module.exports = rumination;
