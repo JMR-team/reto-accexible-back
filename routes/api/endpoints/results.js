@@ -6,6 +6,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const ObjectID = require('mongodb').ObjectId;
 const emailValidator = require('email-validator');
+const { hashSync } = require("bcrypt");
 
 // Router
 const router = require('express').Router();
@@ -20,6 +21,7 @@ const personalPronouns = require('../../../scoring-chatbot/personalPronouns');
 const keyWords = require('../../../scoring-chatbot/keyWords');
 
 
+
 // POST method for sending the results to the user and if the user is logged save results in the database.
 router.post(
     '/',
@@ -27,6 +29,8 @@ router.post(
     validateResults,
     async function (req,res) {
     
+    // CALCULATION OF THE TOTAL SCORE
+
     // score of the test questions, chat conversation and total score
     let [testScore, chatScore, totalScore] = [req.body.testScore, 0, 0];
 
@@ -38,6 +42,25 @@ router.post(
     chatScore += responseTimeScore( req.body.chatBotAnswers.map(({text,responseTime})=>({text,responseTime})) ) //response time
     chatScore += [rumination,personalPronouns,keyWords].map(scoringFunction=>scoringFunction(conversationString)).reduce((prev,next)=>prev+next);
     totalScore += chatScore;
+
+
+    // SAVE THE SCORE IN THE DATABASE
+
+    let dateTimeOfRequest = (new Date()).toISOString()
+
+    // If the user has presented credentials, i.e., userID is in req, save the results in the database with the userID encrypted
+    if (req.userID != undefined) {
+        let db = req.app.locals.db;
+        db.collection("testResults").insertOne({
+            user: hashSync(req.userID.toString(),10),
+            totalScore: totalScore,
+            testScore: testScore,
+            chatScore: chatScore,
+            dateTime: dateTimeOfRequest,
+        });
+    }
+
+    // COMUNICATE THE RESULTS WITH AN EMAIL
 
     // Build the email for the results communication
     let message = {
@@ -82,12 +105,14 @@ router.post(
         // res.send({msg:`Email succesfully sent to ${info.accepted.join(', ')}`});
     });
 
+    // SEND HTTP RESPONSE TO THE CLIENT CONTAINIG THE SCORING
+
     res.json({
         results:{
             totalScore:totalScore,
             testScore:testScore,
             chatScore:chatScore,
-            date:(new Date()).toISOString(),
+            dateTime: dateTimeOfRequest,
         }
     })
 })
@@ -122,7 +147,7 @@ function authenticateUser(req,res,next) {
                 // The user exists ===>>> push user data to the request body and continue with the middleware chain
                 req.body.email = user.email;
                 req.body.firstName = user.firstName;
-                req.userId = user._id;
+                req.userID = user._id;
                 next()
             });
         });
