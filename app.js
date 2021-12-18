@@ -9,6 +9,7 @@ require('dotenv').config()
 
 // Load the routers
 const apiRouter = require('./routes/api/router');
+const authRouter = require('./routes/auth/router');
 
 // Declare and init the app instance
 const app = express();
@@ -28,14 +29,26 @@ app.use(cookieParser());
 
 // Mount the routers in the app
 app.use('/api', apiRouter);
+app.use('/auth',authRouter);
 
 // Connect the app to the database. If its necessary, add indexes here
 MongoClient.connect( process.env.MONGODB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017' , function(err, client) {
   if(err!==undefined) {
     console.log(err);
   } else {
-    // let db = client.db('accexible');
-    app.locals.db = client.db('accexible');
+    let db = client.db('accexible');
+    // Create an index in the users collection to avoid repeated emails
+    db.collection('users').createIndex(
+      {
+        email:1,  // Name that the user choose for the bike
+      },
+      {
+        name:"unique_email", //name of the index, not the same name as above
+        unique:true,
+      }
+    )
+    // add the database to the app
+    app.locals.db = db;
   }
 });
 
