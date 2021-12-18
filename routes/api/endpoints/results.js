@@ -3,6 +3,9 @@ const path = require('path');
 const mjml2html  = require('mjml');
 const handlebars = require('handlebars');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
+const ObjectID = require('mongodb').ObjectId;
+const emailValidator = require('email-validator');
 
 // Router
 const router = require('express').Router();
@@ -18,7 +21,11 @@ const keyWords = require('../../../scoring-chatbot/keyWords');
 
 
 // POST method for sending the results to the user and if the user is logged save results in the database.
-router.post('/', validateResults, async function (req,res) {
+router.post(
+    '/',
+    authenticateUser,
+    validateResults,
+    async function (req,res) {
     
     // score of the test questions, chat conversation and total score
     let [testScore, chatScore, totalScore] = [req.body.testScore, 0, 0];
@@ -89,6 +96,53 @@ module.exports = router;
 
 
 // Middleware functions
+
+// Read the jwt token to authenticate registered users and forbid unlogged users to send tests
+// with the email of a registered user
+function authenticateUser(req,res,next) {
+    console.log('IN Authenticate');
+    // Read the jwt token from the request
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    // Logic to implement for requests that contain a token in the authorization header
+    if (token != undefined){
+        // Verify the token
+        jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decodedToken) => {
+          // token is invalid. Stop the request and response with forbidden error code
+          if (err != undefined) return res.status(403).send(err);
+          // In case the token is valid, find the user by its ID in the database
+          let userID = decodedToken.id;
+          let db = req.app.locals.db;
+          db.collection("users")
+            .findOne({ _id: new ObjectID(userID) })
+            .then((user) => {
+                // The token is valid but there is no user associated to it
+                if (user == undefined) return res.status(403).send({err:'user does not exist'});
+                // The user exists ===>>> push user data to the request body and continue with the middleware chain
+                req.body.email = user.email;
+                req.body.firstName = user.firstName;
+                req.userId = user._id;
+                next()
+            });
+        });
+    } else { // Logic to implement if the request does not contain a token
+        // Check validity of email format, reject requests with invalid email address
+        if (!emailValidator.validate(req.body.email)){
+            return res.status(400).json({err:'invalid email address format'})
+        }
+    
+        // Even if the email is valid, check if the email belongs to a registered user. If so, reject the request
+        let db = req.app.locals.db;
+        db.collection("users")
+          .findOne({ email: req.body.email })
+          .then((user) => {
+            if (user!=undefined) return res.status(403).json({err:'Forbidden, email belongs to a registered user'});
+            next();
+          });
+    }
+    
+}
 
 // Validate the data in the body related to the results of the test and the chatbot conversation
 function validateResults(req,res,next){
