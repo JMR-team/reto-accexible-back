@@ -2,6 +2,7 @@
 const testQuestionsRouter = require('./endpoints/test-questions');
 const chabotQuestionsRouter = require('./endpoints/chabot-messages');
 const resultsRouter = require('./endpoints/results');
+const {authenticateUserDataAccess} = require('./middleware/authentication.js')
 
 const { Router } = require("express");
 
@@ -9,6 +10,7 @@ const { Router } = require("express");
 const router = Router();
 
 // Add middleware for the api routes here
+router.get('/results',authenticateUserDataAccess);
 
 // Mount the routes here
 router.use('/test-questions',testQuestionsRouter);

@@ -118,48 +118,29 @@ router.post(
 })
 
 // GET method for requesting the results of a logged user.
-router.get(
-    '/',
-    authenticateUserDataAccess,
-    (req,res,next)=>{
-        let db = req.app.locals.db;
-        let results = [];
-        db.collection('testResults').find(
-            {},
-            {projection : {_id:0}}
-        ).forEach(doc=>{
-            if ( compareSync(req.userID, doc.user) ) {
-                results.push( 
-                    (({totalScore,testScore,chatScore,dateTime})=>({totalScore,testScore,chatScore,dateTime}))(doc) 
-                );
-            }
-        }).then(data=>{
-            res.json(results);
-        })
-    }
-)
+router.get('/',(req,res,next)=>{
+    let db = req.app.locals.db;
+    let results = [];
+    db.collection('testResults').find(
+        {},
+        {projection : {_id:0}}
+    ).forEach(doc=>{
+        if ( compareSync(req.userID, doc.user) ) {
+            results.push( 
+                (({totalScore,testScore,chatScore,dateTime})=>
+                ({totalScore,testScore,chatScore,dateTime}))(doc) 
+            );
+        }
+    }).then(data=>{
+        res.json(results);
+    })
+})
 
 
 module.exports = router;
 
 
 // Middleware functions
-
-// Authenticate registered users for accesing personal data
-function authenticateUserDataAccess(req,res,next) {
-    // Read the jwt token from the request
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
-
-    // Verify the token and authorize users
-    jwt.verify(token, process.env.JWT_SECRET_KEY,(err,decodedToken)=>{
-        // token is invalid. Stop the request and response with forbidden error code
-        if (err != undefined) return res.status(403).send(err);
-        // For valid tokens continue with the middleware chain
-        req.userID = decodedToken.id;
-        next();
-    })
-}
 
 
 // Read the jwt token to authenticate registered users and forbid unlogged users to send tests
