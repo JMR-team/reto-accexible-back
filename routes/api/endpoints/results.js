@@ -6,7 +6,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const ObjectID = require('mongodb').ObjectId;
 const emailValidator = require('email-validator');
-const { hashSync } = require("bcrypt");
+const { hashSync, compareSync } = require("bcrypt");
 
 // Router
 const router = require('express').Router();
@@ -117,15 +117,35 @@ router.post(
     })
 })
 
+// GET method for requesting the results of a logged user.
+router.get('/',(req,res,next)=>{
+    let db = req.app.locals.db;
+    let results = [];
+    db.collection('testResults').find(
+        {},
+        {projection : {_id:0}}
+    ).forEach(doc=>{
+        if ( compareSync(req.userID, doc.user) ) {
+            results.push( 
+                (({totalScore,testScore,chatScore,dateTime})=>
+                ({totalScore,testScore,chatScore,dateTime}))(doc) 
+            );
+        }
+    }).then(data=>{
+        res.json(results);
+    })
+})
+
+
 module.exports = router;
 
 
 // Middleware functions
 
+
 // Read the jwt token to authenticate registered users and forbid unlogged users to send tests
 // with the email of a registered user
 function authenticateUser(req,res,next) {
-    console.log('IN Authenticate');
     // Read the jwt token from the request
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -171,8 +191,6 @@ function authenticateUser(req,res,next) {
 
 // Validate the data in the body related to the results of the test and the chatbot conversation
 function validateResults(req,res,next){
-    console.log(req.body);
-
     // Validate the score of the test
     req.body.testScore = parseFloat(req.body.testScore);
     if (isNaN(req.body.testScore) || req.body.testScore < 2.25 || req.body.testScore > 9){
