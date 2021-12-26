@@ -1,10 +1,12 @@
 require('dotenv').config();
 const {MongoClient} = require('mongodb');
-const bcrypt = require('bcrypt');
+const { createHash } = require("crypto");
 
 
-let connectionURL = process.env.MONGODB_CONNECTION_STRING;
-let userID = ""; // Insert userID here
+
+let connectionURL = process.env.MONGODB_CONNECTION_STRING || "mongodb://127.0.0.1:27017"; ;
+let userID = "61bca67b248ff4743905ea5d"; // Insert userID here
+let hashedUserID = createHash("sha256").update( userID ).digest("base64");
 
 const resultsNumber = 60;
 
@@ -26,7 +28,7 @@ for (let i = 0; i < resultsNumber ; i++){
     let chatScore = Math.round(minChatScore + Math.random()*(maxChatScore-minChatScore));
     resultsArray.push(
         {
-            user: bcrypt.hashSync(userID,10),
+            user: hashedUserID,
             dateTime : (new Date(date)).toISOString(),
             testScore,
             chatScore,
@@ -42,12 +44,9 @@ MongoClient.connect( connectionURL , function(err, client) {
   if(err!==undefined) {
     console.log(err);
   } else {
-    // client.db('accexible').collection('testResults').find().toArray().then(data=>console.log(data))
-    client.db('accexible').collection('testResults').insertMany(resultsArray)
+    client.db('accexible').collection('testResults').insertMany(resultsArray,(err,data)=>{
+      client.close();
+    })
   }
 });
-
-
-// console.log(initalDateTime);
-// console.log(dayAfter);
 

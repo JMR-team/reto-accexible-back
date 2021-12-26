@@ -6,7 +6,7 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const ObjectID = require('mongodb').ObjectId;
 const emailValidator = require('email-validator');
-const { hashSync, compareSync } = require("bcrypt");
+const {createHash} = require('crypto')
 
 // Router
 const router = require('express').Router();
@@ -52,11 +52,11 @@ router.post(
     if (req.userID != undefined) {
         let db = req.app.locals.db;
         db.collection("testResults").insertOne({
-            user: hashSync(req.userID.toString(),10),
-            totalScore: totalScore,
-            testScore: testScore,
-            chatScore: chatScore,
-            dateTime: dateTimeOfRequest,
+          user: createHash("sha256").update( req.userID.toString() ).digest("base64"),
+          totalScore: totalScore,
+          testScore: testScore,
+          chatScore: chatScore,
+          dateTime: dateTimeOfRequest,
         });
     }
 
@@ -120,20 +120,18 @@ router.post(
 // GET method for requesting the results of a logged user.
 router.get('/',(req,res,next)=>{
     let db = req.app.locals.db;
-    let results = [];
-    db.collection('testResults').find(
-        {},
-        {projection : {_id:0}}
-    ).forEach(doc=>{
-        if ( compareSync(req.userID, doc.user) ) {
-            results.push( 
-                (({totalScore,testScore,chatScore,dateTime})=>
-                ({totalScore,testScore,chatScore,dateTime}))(doc) 
-            );
+    db.collection("testResults")
+      .find(
+        { user: createHash("sha256").update(req.userID).digest("base64") },
+        { projection: { _id: 0, user: 0} }
+      )
+      .toArray((err, data) => {
+        if (err != undefined){
+            res.status(500).send(err);
+        } else {
+            res.json(data);
         }
-    }).then(data=>{
-        res.json(results);
-    })
+      });
 })
 
 
