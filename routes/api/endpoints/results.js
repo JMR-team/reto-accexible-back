@@ -125,12 +125,12 @@ router.get('/',(req,res,next)=>{
         {},
         {projection : {_id:0}}
     ).forEach(doc=>{
-        // if ( compareSync(req.userID, doc.user) ) {
+        if ( compareSync(req.userID, doc.user) ) {
             results.push( 
                 (({totalScore,testScore,chatScore,dateTime})=>
                 ({totalScore,testScore,chatScore,dateTime}))(doc) 
             );
-        // }
+        }
     }).then(data=>{
         res.json(results);
     })
