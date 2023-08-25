@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient } = require("mongodb");
 
 // Use dot env to load the .env file
 require("dotenv").config();
@@ -34,13 +34,7 @@ app.use("/auth", authRouter);
 // Connect the app to the database. If its necessary, add indexes here
 MongoClient.connect(
   process.env.MONGODB_CONNECTION_STRING,
-  {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  },
+  {},
   function (err, client) {
     if (err !== undefined) {
       console.log(err);
