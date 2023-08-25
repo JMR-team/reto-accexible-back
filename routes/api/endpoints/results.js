@@ -18,6 +18,7 @@ const rumination = require('../../../scoring-chatbot/rumination');
 const responseTimeScore = require('../../../scoring-chatbot/responseTimeScore');
 const personalPronouns = require('../../../scoring-chatbot/personalPronouns');
 const keyWords = require('../../../scoring-chatbot/keyWords');
+const { ObjectId } = require('mongodb');
 
 // POST method for sending the results to the user and if the user is logged save results in the database.
 router.post('/', authenticateUser, validateResults, async function (req, res) {
@@ -124,7 +125,10 @@ router.get('/', async (req, res, next) => {
     //   let results = [];
     const results = await db
         .collection('testResults')
-        .find({ user: req.userID }, { projection: { _id: 0 } })
+        .find(
+            { user: ObjectId(req.userID) },
+            { projection: { _id: 0, user: 0 } }
+        )
         .toArray();
     // .forEach((doc) => {
     //   if (compareSync(req.userID, doc.user)) {
