@@ -1,0 +1,103 @@
+[
+    {
+        "_id": "61ba307731453b86cbd50c5e",
+        "type": "greeting",
+        "text": "Hola 😄. Te voy a hacer una serie de preguntas para analizar tu estado de ánimo. Para que los resultados de esta prueba sean precisos, necesito que tus respuestas sean lo más completas posibles. En la medida de lo posible, evita responder con monosílabos o frases muy cortas. La idea de esta prueba es que puedas expresarte con total naturalidad. Pulsa 'empezar test' para comenzar."
+    },
+    {
+        "_id": "61ba307731453b86cbd50c6c",
+        "index": 5,
+        "type": "question",
+        "text": "¿Crees que estás en una especie de bucle?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c6b",
+        "index": 5,
+        "type": "question",
+        "text": "¿Tienes pensamientos negativos frecuencia?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c60",
+        "index": 0,
+        "type": "question",
+        "text": "Para empezar, cuéntame qué tal estás."
+    },
+    {
+        "_id": "61ba307731453b86cbd50c65",
+        "index": 2,
+        "type": "question",
+        "text": "¿Los sentimientos de tristeza te hacen sentir rabia?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c66",
+        "index": 3,
+        "type": "question",
+        "text": "¿Sueles compartir tus sentimientos con la gente cercana a ti?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c6d",
+        "index": 6,
+        "type": "question",
+        "text": "¿Consideras que necesitas ayuda?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c62",
+        "index": 1,
+        "type": "question",
+        "text": "¿A veces te sientes fuera de lugar?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c67",
+        "index": 3,
+        "type": "question",
+        "text": "¿Has intentado hablar con otras personas sobre como te sientes?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c68",
+        "index": 3,
+        "type": "question",
+        "text": "¿Tienes algún pensamiento o inquietud que te dificulte dormir por las noches?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c61",
+        "index": 1,
+        "type": "question",
+        "text": "¿En algún momento tienes sentimientos de soledad?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c63",
+        "index": 2,
+        "type": "question",
+        "text": "¿Hay algo que te genere sentimientos de tristeza?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c69",
+        "index": 4,
+        "type": "question",
+        "text": "¿Ha sucedido algo que te haya bajado la moral?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c6e",
+        "index": 6,
+        "type": "question",
+        "text": "¿Crees que deberías hablar con alguien que pueda ayudarte?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c5f",
+        "index": 0,
+        "type": "question",
+        "text": "Cuéntame como te sientes en general."
+    },
+    {
+        "_id": "61ba307731453b86cbd50c64",
+        "index": 2,
+        "type": "question",
+        "text": "¿Ha pasado algo más recientemente que te haya puesto triste?"
+    },
+    {
+        "_id": "61ba307731453b86cbd50c6a",
+        "index": 4,
+        "type": "question",
+        "text": "¿Sientes que te falta vitalidad a la hora de hacer cosas?"
+    }
+]
