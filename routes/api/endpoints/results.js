@@ -19,6 +19,7 @@ const responseTimeScore = require('../../../scoring-chatbot/responseTimeScore');
 const personalPronouns = require('../../../scoring-chatbot/personalPronouns');
 const keyWords = require('../../../scoring-chatbot/keyWords');
 const { ObjectId } = require('mongodb');
+const db = require('../../../db');
 
 // POST method for sending the results to the user and if the user is logged save results in the database.
 router.post('/', authenticateUser, validateResults, async function (req, res) {
@@ -52,7 +53,7 @@ router.post('/', authenticateUser, validateResults, async function (req, res) {
 
     // If the user has presented credentials, i.e., userID is in req, save the results in the database with the userID encrypted
     if (req.userID != undefined) {
-        let db = req.app.locals.db;
+        // let db = req.app.locals.db;
         db.collection('testResults').insertOne({
             user: req.userID.toString(),
             totalScore: totalScore,
@@ -121,7 +122,7 @@ router.post('/', authenticateUser, validateResults, async function (req, res) {
 
 // GET method for requesting the results of a logged user.
 router.get('/', async (req, res, next) => {
-    let db = req.app.locals.db;
+    // let db = req.app.locals.db;
     //   let results = [];
     const results = await db
         .collection('testResults')
@@ -164,7 +165,7 @@ function authenticateUser(req, res, next) {
             if (err != undefined) return res.status(403).send(err);
             // In case the token is valid, find the user by its ID in the database
             let userID = decodedToken.id;
-            let db = req.app.locals.db;
+            // let db = req.app.locals.db;
             db.collection('users')
                 .findOne({ _id: new ObjectID(userID) })
                 .then((user) => {
@@ -190,7 +191,7 @@ function authenticateUser(req, res, next) {
         }
 
         // Even if the email is valid, check if the email belongs to a registered user. If so, reject the request
-        let db = req.app.locals.db;
+        // let db = req.app.locals.db;
         db.collection('users')
             .findOne({ email: req.body.email })
             .then((user) => {

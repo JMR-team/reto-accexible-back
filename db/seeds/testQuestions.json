@@ -1,0 +1,101 @@
+[
+    {
+        "_id": "61b4f154fdb4f94e755dca07",
+        "id": 1,
+        "question": "Durante las últimas 2 semanas, ¿con qué frecuencia has sentido poco interés o placer en hacer cosas?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca08",
+        "id": 2,
+        "question": "Durante las últimas 2 semanas, ¿te has sentido decaído/decaída, deprimido/deprimida o sin esperanzas?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0a",
+        "id": 4,
+        "question": "Durante las últimas 2 semanas, ¿no has podido dejar de preocuparte?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0e",
+        "id": 8,
+        "question": "Durante las últimas 2 semanas, ¿te has irritado o enfadado con facilidad?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0b",
+        "id": 5,
+        "question": "Durante las últimas 2 semanas, ¿te has preocupado excesivamente por diferentes cosas?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca09",
+        "id": 3,
+        "question": "Durante las últimas 2 semanas, ¿te has sentido ansioso/a alterado/a?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0f",
+        "id": 9,
+        "question": "Durante las últimas 2 semanas, ¿has sentido miedo, como si fuera a suceder algo terrible?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0d",
+        "id": 7,
+        "question": "Durante las últimas 2 semanas, ¿te has sentido tan intranquilo/intranquila que no podías estarte quieto/quieta?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    },
+    {
+        "_id": "61b4f154fdb4f94e755dca0c",
+        "id": 6,
+        "question": "Durante las últimas 2 semanas, ¿has tenido dificultad para relajarte?",
+        "answers": [
+            { "text": "Ningún día", "score": 0.25 },
+            { "text": "Menos de 7 días", "score": 0.5 },
+            { "text": "Mas de 7 días", "score": 0.75 },
+            { "text": "Casi todos los días", "score": 1 }
+        ]
+    }
+]
