@@ -1,23 +1,16 @@
 // 3rd party packages
-const ObjectID = require("mongodb").ObjectId;
+const ObjectID = require('mongodb').ObjectId;
 
 // Router
-const router = require("express").Router();
+const router = require('express').Router();
+
+const userSerializer = ({ password, _id, ...user }) => user;
 
 // GET method for obtaining user info
-router.get('/',(req,res)=>{
-    let db = req.app.locals.db;
-    db.collection('users').findOne( new ObjectID(req.userID),{projection:{_id:0,password:0}})
-        .then(data=>{
-            if (data!=undefined) {
-                res.json(data);
-            } else {
-                res.sendStatus(404);
-            }
-        }).catch(err=>{
-            res.sendStatus(500)
-        })
-})
+router.get('/', (req, res) => {
+    const { user } = req;
+    return res.json(userSerializer(user));
+});
 
 // export the router
 module.exports = router;
